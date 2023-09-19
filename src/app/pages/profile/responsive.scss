@@ -1,0 +1,11 @@
+@media screen and (max-width: 767px) {
+    
+
+    .img-and-name{justify-content: center;}
+    .img-and-name img{margin: 20px 0 20px 0;}
+    .img-and-name h4{text-align: center;}
+
+    .title-more-info{flex-wrap: wrap; align-items: center; justify-content: center;}
+    .title-more-info h3{margin: 20px}
+    .title-more-info button{margin: 10px;}
+}

@@ -1,0 +1,76 @@
+<div class="wrapper">
+
+
+
+    <div class="progress-bar">
+      <div class="step first-step">
+        <a routerLink="/checkout/billing-details" class="circle"></a>
+        <h5>Dettagli fatturazione</h5>
+      </div>
+      <div class="step second-step grey">
+        <button routerLink="/checkout/shipping-info" class="circle"></button>
+        <h5>Spedizione</h5>
+      </div>
+      <div class="step third-step grey" ngClass="{'blue': this.thirdStep, 'grey': !this.thirdStep}">
+        <button routerLink="/checkout/payments" class="circle"></button>
+        <h5>Pagamento</h5>
+      </div>
+    </div>
+  
+  
+  
+    
+  
+    <div class="card-container">
+
+
+
+      <div class="delivery-info">
+        <div class="contacts">
+          <h3>CONTATTI:</h3>
+          <ul>
+            <li>N. Telefono: {{this.phoneNumber}}</li>
+            <li>Email: {{this.email}}</li>
+          </ul>
+        </div>
+        <div class="address">
+          <h3>INDIRIZZO DI SPEDIZIONE:</h3>
+          <p>{{this.shippingAddress + ', ' + this.city + ', ' + this.country}}</p>
+        </div>
+      </div>
+    
+    
+      
+    
+      <div class="cart-preview">
+    
+    
+        <div class="single-product" *ngFor="let p of product">
+    
+          <img [routerLink]="['/product', p.id]" src="{{'https://api.kendydrink.com/product/' + p.id + '/img/' + '50'}}" alt="">
+          <div [routerLink]="['/product', p.id]" class="title"><h3>{{p.name}}</h3></div>
+          <div class="quantity"><h4>{{p.quantity}}</h4></div>
+          <div class="price" [routerLink]="['/product', p.id]"><h3>{{p.quantity * p.price | currency: 'EUR'}}</h3></div>
+    
+        </div>
+  
+    
+      </div>
+  
+  
+    </div>
+  
+  
+  
+  
+    <div class="btns">
+        <div class="back-button">
+            <button (click)="goBack()"> <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg> </button>
+        </div>
+        <button class="continue-btn" routerLink="/checkout/payments" (onclick)="sendCart()"> <h4>Vai al pagamento</h4> </button>
+    </div>
+  
+  
+  
+  </div>
+  

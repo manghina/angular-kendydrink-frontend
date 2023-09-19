@@ -1,0 +1,136 @@
+
+.wrapper{width: 100%; height: 100%; margin-top: 100px; display: flex; flex-direction: column; align-items: center;}
+.page-container{width: 90%; padding-bottom: 75px; display: flex; flex-direction: row; flex-wrap: wrap;   justify-content: space-around;}
+.titles-container{width: 90%; margin-top: 25px;}
+
+/* PROGRESS BAR */
+.progress-bar{display: flex; flex-direction: row; justify-content: center;}
+
+.step{width: 125px; margin: 50px 0;}
+.step::before{content: "";
+  position: relative;
+  top: 12px;
+  left: 50px;
+  display: flex;
+  height: 5px;
+  width: 100%;
+  background: var(--blu);}
+.circle{display: flex; width: 20px; height: 20px; margin-left: 50px; border: none; border-radius: 50%; background-color: var(--blu); z-index: 1; position: relative; cursor: pointer;}
+.step h5{font-size: 20px; font-weight: normal; text-align: center; margin: 15px 0;}
+
+
+.third-step::before{display: none;}
+.third-step .circle{margin-top: 5px;}
+
+
+.first-step::before{background-color: var(--blu);}
+.second-step::before{background-color: var(--blu);}
+.second-step .circle{background-color: var(--blu);}
+.third-step::before{background-color: var(--blu);}
+.third-step .circle{background-color: var(--blu);}
+
+
+
+
+
+
+/*     STILI PAGINA     */
+
+.titles h3{margin-bottom: 5px;}
+.titles h5{color: var(--grey);}
+
+
+
+
+.sx-column{width: 50%; min-width: 430px; margin: 25px 20px 0 0;}
+.dx-column{width: 40%; margin: 25px 0 0 20px;}
+.card{width: auto; margin: 20px 0 20px 0; padding: 7px; border: 2px solid #e1e1e1; border-radius: 10px;}
+hr{margin: 15px 0 15px 0 !important; border: 0.5px solid #e1e1e1;}
+
+
+
+/*********************************************/
+/*              CHECKOUT RAPIDO              */
+/*********************************************/
+
+
+.checkout-rapido > .card-title{width: 100%; position: relative; top: -15px; display: flex; justify-content: center;}
+.checkout-rapido > .card-title > h4{width: 169px; background-color: white; left: 36%; display: grid; place-items: center;}
+
+.img-container{display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; position: relative; top: -10px; margin-inline: 10px;}
+.img-container button{width: 125px; height: 50px; border: none; outline: none; border-radius: 10px; margin: 5px; display: grid; place-items: center; cursor: pointer;}
+.img-container button > img{height: 20px;}
+.btn1{background-color: #5a30f4;}
+.btn2{background-color: #000;}
+.btn3{background-color: #fdc635;}
+.btn4{background-color: #000;}
+
+
+
+
+
+/******************************************/
+/*              CARD RECEIPT              */
+/******************************************/
+
+
+.card.reicept-method{padding: 20px !important;}
+.card.reicept-method h4{margin: 0 0 1rem 0 !important;}
+
+.card.reicept-method h5{display: flex; align-items: center; font-size: 15px !important; margin: 5px 0 0 0;   font-weight: normal;}
+.card.reicept-method h5 > img{width: 20px; margin-right: 5px !important;}
+
+.card.reicept-method > .voce > .text > h5.p{color: var(--grey); font-size: 12px !important; margin: 5px 0 0 0 !important;}
+
+.voce{display: flex; flex-direction: row; justify-content: space-between;}
+.arrow{width: 10px; transform: rotateZ(180deg);}
+
+
+
+
+
+/*******************************************/
+/*              CODICE SCONTO              */
+/*******************************************/
+
+.card.coupon-code{padding: 20px !important;}
+.card.coupon-code h4{margin: 0 0 1rem 0 !important;}
+
+.codice-sconto{display: flex; flex-wrap: wrap; justify-content: center;}
+.codice-sconto *{margin: 5px;}
+.codice-sconto input{height: 35px; padding: 5px; border: 1px solid black; border-radius: 5px;}
+.codice-sconto button{height: 35px; width: 75px; background-color: var(--blu); border: none; border-radius: 5px; outline: none; color: white; cursor: pointer;}
+
+
+
+
+/***************************************/
+/*              DX COLUMN              */
+/***************************************/
+
+
+.total-container{background-color: #f9f9f9; border-radius: 15px; padding: 20px;}
+
+.price{display: flex; flex-direction: row; justify-content: space-around;}
+.price h3{margin: 0 !important;}
+.price h3:first-child{font-weight: normal !important;}
+
+
+.more-info{display: flex; flex-direction: column; align-items: center;}
+.more-info > .items{width: 80%; display: flex; flex-direction: row; align-items: center; justify-content: space-between;}
+.more-info > .items > h4{margin: 0 !important;}
+
+.items.due h5{color: red;}
+
+.buy-btn{width: 100%; height: 50px; margin: 20px 0; background-color: var(--blu); border: none; border-radius: 15px; outline: none; font-size: 15px; color: white;}
+.accept-terms-text{color: var(--grey) !important; text-align: center; font-size: 12px;}
+
+
+
+
+
+@media screen and (max-width: 950px) {
+    .page-container{flex-direction: column-reverse;}
+    .sx-column{width: 100%; min-width: 0; margin-right: 0px;}
+    .dx-column{width: 100%; margin: 50px 0 0 0; padding-inline: 20px;}
+}

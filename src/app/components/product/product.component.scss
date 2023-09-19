@@ -1,0 +1,87 @@
+ .products{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  max-width: 1500px;
+  align-items: center;
+  justify-content: center;
+}
+
+.product{
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 0px 20px 0px rgba($color: #000000, $alpha: 0.3);
+  border-radius: 25px;
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.prodotto{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 100px;
+}
+.product:hover .prodotto{margin-top: 30px; margin-bottom: 10px;}
+.prodotto img{width: 100px; margin-bottom: 15px; transition: .2s;}
+.product:hover .prodotto img{width: 150px; transition: 1s; position: absolute; margin-top: -100px;}
+
+.text{display: flex; align-items: center; flex-direction: column;}
+.text h3{color: var(--blu); margin-bottom: 15px;}
+.product:hover .text > h5{transition: .0s; translate: 0 300px;}
+.product:hover .text > h3{transition: .3s; transition-delay: .0s; position: relative; bottom: -100px; translate: 0 -30px;}
+
+
+
+
+
+
+.prodotto-acquista{
+  display: flex;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #111;
+  opacity: 0;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  bottom: -180px;
+  transition: 3s;
+}
+
+.product:hover .prodotto-acquista{transition: .5s; opacity: 1; translate: 0 -123px; transition-delay: .2s;}
+
+
+.continua-lo-shopping{
+  width: 150px;
+  height: 70px;
+  background: rgba($color: #1545AC, $alpha: 0.95);
+  border-radius: 0 0 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.continua-lo-shopping button{background: transparent; border: 0; cursor: pointer;}
+.continua-lo-shopping h2{color: white; font-size: 20px; text-align: center; margin-bottom: 0;}
+
+.add-to-cart{
+  width: 150px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 0 0 25px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-to-cart button{background: transparent; border: 0; cursor: pointer;}
+.add-to-cart img{width: 50px;}

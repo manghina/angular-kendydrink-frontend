@@ -1,0 +1,76 @@
+<div class="wrapper">
+
+
+
+    <div class="progress-bar">
+      <div class="step first-step">
+        <a routerLink="/checkout/billing-details" class="circle"></a>
+        <h5>Dettagli fatturazione</h5>
+      </div>
+      <div class="step second-step grey">
+        <button [disabled]="homeform.invalid" routerLink="/checkout/shipping-info" [ngClass]="{'cursor-forbidden' : !homeform.valid, 'cursor-pointer' : homeform.valid}" class="circle"></button>
+        <h5>Spedizione</h5>
+      </div>
+      <div class="step third-step grey" ngClass="{'blue': this.thirdStep, 'grey': !this.thirdStep}">
+        <button [disabled]="homeform.invalid" routerLink="/checkout/shipping-info" [ngClass]="{'cursor-forbidden' : !homeform.valid, 'cursor-pointer' : homeform.valid}" class="circle"></button>
+        <h5>Pagamento</h5>
+      </div>
+    </div>
+  
+  
+  
+    
+  
+    <div class="card-container">
+  
+      <form class="address-info" [formGroup]="homeform" (ngSubmit)="onSubmit()">
+  
+        <div class="field"><h5>NOME:</h5> <input type="name" class="input" required autocomplete="off" placeholder="Nome" formControlName="name"></div>
+        <div class="field"><h5>COGNOME:</h5> <input type="surname" class="input" required autocomplete="off" placeholder="Cognome" formControlName="surname"></div>
+        <div class="field"><h5>EMAIL:</h5> <input type="email" class="input" required autocomplete="off" placeholder="Email" formControlName="email"></div>
+        <div class="field"><h5>NUMERO DI TELEFONO:</h5> <input type="phone-number" class="input" required autocomplete="off" placeholder="Numero di telefono" formControlName="phoneNumber"></div>
+        <div class="field"><h5>CITTÀ:</h5> <input type="city" class="input" required autocomplete="off" placeholder="Città" formControlName="city"></div>
+        <div class="field"><h5>PAESE/REGIONE:</h5> <input type="country" class="input" required autocomplete="off" placeholder="Paese/regione" formControlName="country"></div>
+        <div class="field"><h5>INDIRIZZO DI SPEDIZIONE:</h5> <input type="text" class="input" required autocomplete="off" placeholder="Indirizzo" formControlName="shippingAddress"></div>
+        <div class="field"><h5>CODICE POSTALE:</h5> <input type="zip-code" class="input" required autocomplete="off" placeholder="CAP" formControlName="zipCode"></div>
+    
+      </form>
+    
+    
+      <!-- <form class="delivery-info">
+    
+        <div class="contact"></div>
+        <div class="address"></div>
+    
+      </form> -->
+    
+      <div class="cart-preview">
+    
+    
+        <div class="single-product" *ngFor="let p of product">
+    
+          <img src="{{'https://api.kendydrink.com/product/' + p.id + '/img/' + '50'}}" alt="">
+          <div class="title"><h3>{{p.name}}</h3></div>
+          <div class="quantity"><h4>{{p.quantity}}</h4></div>
+          <div class="price"><h3>{{p.quantity * p.price | currency: 'EUR'}}</h3></div>
+    
+        </div>
+  
+    
+      </div>
+  
+  
+    </div>
+  
+  
+  
+  
+    <button class="continue-btn" routerLink="/checkout/shipping-info" [disabled]="homeform.invalid" [ngClass]="{'reddino' : !homeform.valid, 'bluee' : homeform.valid}" (click)="onSubmit()">
+      <h4>Vai alla spedizione</h4>
+    </button>
+
+  
+  
+  
+  </div>
+  

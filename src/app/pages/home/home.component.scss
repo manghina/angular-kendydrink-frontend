@@ -1,0 +1,114 @@
+.products{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.products h2{text-transform: uppercase; position: relative; top: 50px; color: var(--blu); font-size: 30px;}
+
+.products1{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+  max-width: 1500px;
+  align-items: center;
+  justify-content: center;
+}
+
+.product{
+  width: 300px;
+  height: 300px;
+  box-shadow: 0px 0px 20px 0px rgba($color: #000000, $alpha: 0.3);
+  border-radius: 25px;
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+
+.mostra-catalogo{margin-top: 50px; margin-bottom: 100px;}
+.mostra-catalogo a{
+  text-transform: uppercase;
+  font-size: 20px;
+  background: var(--blu);
+  padding: 20px 40px 20px 40px;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.mostra-catalogo a:hover{box-shadow: 0 0 10px 0 var(--blu); transition: .25s;}
+
+
+
+/*****************************/
+
+
+.boxes{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.box{width: 500px; height: 300px; margin: 30px; display: flex; align-items: center; flex-direction: column; min-width: 45%; max-width: 100%;}
+.box h2{font-size: 25px; margin: 50px 30px 20px 20px; text-align: center; color: white;}
+.box p{text-align: center; font-weight: 100; max-width: 80%;}
+
+
+
+.newsletter{background-color: var(--blu);}
+.newsletter p{color: var(--light-grey);}
+
+.newsletter-field{display: flex; align-items: center; justify-content: center; margin-top: 50px;}
+
+.newsletter-mail-icon{width: 60px; margin-right: 30px;}
+.newsletter-enter-icon{width: 25px; margin-left: 15px;}
+
+.newsletter input{
+  height: 30px;
+	outline: none;
+	background: none;
+  border: none;
+  border-bottom: 3px solid white;
+  color: white;
+}
+
+
+.social{background-color: var(--grey);}
+.social p{color: white;}
+
+.social > .icons{height: 50px; display: flex; flex-direction: row; justify-content: center; margin-top: 50px;}
+.social > .icons img{height: 50px; margin: 0 20px 0 20px}
+
+
+
+.carousel-container {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  max-height: 700px;
+  max-width: 1500px;
+  padding: 2em 2em 0;
+
+  position: relative;
+  top: 400px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}

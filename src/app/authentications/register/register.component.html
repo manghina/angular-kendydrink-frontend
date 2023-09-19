@@ -1,0 +1,104 @@
+<div class="page-container">
+
+
+
+  <navbar></navbar>
+
+
+
+
+  <div class="contenitore">
+
+
+
+    <div class="testo">
+      <h1>CIAO!</h1>
+      <h2>Sei nuovo? Registrati ora per diventare un cliente!</h2>
+    </div>
+
+
+
+    <div class="register-container">
+
+      <div class="register">
+        <h3>REGISTRATI</h3>
+
+        <!-- <div class="icons-otp">
+          <a class="google-icon" href="">
+            <img src="../../../assets/icons/google-grey-icon.svg" alt="">
+          </a>
+
+          <a class="facebook-icon" href="">
+            <img src="../../../assets/icons/facebook-grey-icon.svg" alt="">
+          </a>
+        </div> -->
+
+
+        <form class="form" [formGroup]="homeform" (ngSubmit)="onSubmit()">
+
+
+          <div class="name">
+              <div class="inputtt">
+                <img class="icon" src="../../../assets/icons/user.svg" alt="">
+                <input type="text" class="input" id="name" name="name" required autocomplete="off" placeholder="Nome" formControlName="name">
+              </div>
+
+              <p class="form-error" *ngIf="!homeform.get('name')?.valid && homeform.get('name')?.touched">⚠️ Compilare il campo!</p>
+          </div>
+
+          <div class="name surname">
+            <div class="inputtt">
+              <img class="icon" src="../../../assets/icons/user.svg" alt="">
+              <input type="text" class="input" id="surname" name="surname" required autocomplete="off" placeholder="Cognome" formControlName="surname">
+            </div>
+
+            <p class="form-error" *ngIf="!homeform.get('surname')?.valid && homeform.get('surname')?.touched">⚠️ Compilare il campo!</p>  <!-- ERROR -->
+        </div>
+
+
+          <div class="email">
+            <div class="inputtt">
+              <img class="icon" src="../../../assets/icons/mail-grey.svg" alt="">
+              <input type="text" class="input" id="email" name="email" required autocomplete="off" placeholder="Email" formControlName="email">
+            </div>
+
+            <p class="form-error" *ngIf="!homeform.get('email')?.valid && homeform.get('email')?.touched">⚠️ Compilare il campo!</p>  <!-- ERROR -->
+        </div>
+
+
+          <div class="password">
+            <img class="icon" src="../../../assets/icons/lock.svg" alt="">
+
+              <input [type]="displayPsw ? 'text' : 'password'" class="input" id="password" name="password" required autocomplete="off" placeholder="Password" formControlName="password">
+              <img src="../../../assets/icons/eye-icon.svg" alt="" class="fas fa-eye" (click)="toggleDisplayPsw()" [style.display]="displayPsw ? 'none' : 'initial'">
+              <img src="../../../assets/icons/eye-slash.svg" alt="" class="fas fa-eye-slash" (click)="toggleDisplayPsw()" [style.display]="displayPsw ? 'initial' : 'none'">
+              <p class="form-error" *ngIf="!homeform.get('password')?.valid && homeform.get('password')?.touched">⚠️ Compilare il campo!</p>
+          </div>
+
+
+          <div class="ccc">
+              <input type="submit" class="submit-btn" value="INVIA" [disabled]="!homeform.valid">
+          </div>
+
+
+
+          <div class="scritte-sotto">
+              <a routerLink="/login">Sei già registrato? Accedi<br></a>
+              <!-- <a>Forgot your password?</a> -->
+          </div>
+
+        </form>
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+
+</div>

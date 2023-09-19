@@ -1,0 +1,110 @@
+<div class="wrapper">
+
+
+  <div class="title">Profilo</div>
+
+
+  <div class="all-info">
+
+
+
+    <div class="card main-info" *ngIf="isLoaded">
+      <div class="img-and-name">
+        <img src="https://images.unsplash.com/photo-1542466500-dccb2789cbbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="">
+        <h4 class="username">{{user.name}} {{user.surname}}</h4>
+      </div>
+
+      <!-- <button class="edit-btn" (click)="onEditDown = !onEditDown"><mat-icon>edit</mat-icon></button> -->
+    </div>
+
+
+    <div class="card more-info" *ngIf="isLoaded">
+      <div class="title-more-info">
+        <h3>Tutte le informazioni</h3>
+        <button class="edit-btn" (click)="onEditDown = !onEditDown"><mat-icon>edit</mat-icon></button>
+      </div>
+
+      <div class="info" *ngIf="!onEditDown">
+        <p><span>NOME:</span> {{name}} </p>
+        <p><span>COGNOME:</span> {{surname}} </p>
+        <p><span>EMAIL:</span> {{user.email}} </p>
+        <p><span>INDIRIZZO:</span> {{ getShippingAddress() }} </p>
+        <p><span>N. TELEFONO:</span> {{ getPhoneNumber() }} </p>
+        <p><span>CAP:</span> {{ getPostalCode() }} </p>
+      </div>
+
+      <form class="container-info-onEdit" *ngIf="onEditDown" [formGroup]="formDown">
+        <div class="info onEdit">
+          <p class="p1"><span>NOME:</span> <input type="text" id="name" name="name" required autocomplete="off" placeholder="{{name}}" formControlName="name"></p>
+          <p class="p2"><span>COGNOME:</span> <input type="text" id="surname" name="surname" required autocomplete="off" placeholder="{{surname}}" formControlName="surname"></p>
+          <p class="p3"><span>EMAIL:</span> <input type="email" id="email" name="email" required autocomplete="off" placeholder="{{user.email}}" formControlName="email"></p>
+          <p class="p4"><span>INDIRIZZO:</span> <input type="text" id="address" name="address" required autocomplete="off" placeholder="{{getShippingAddress()}}" formControlName="address"></p>
+          <p class="p4"><span>N. TELEFONO:</span> <input type="text" id="phoneNumber" name="phoneNumber" required autocomplete="off" placeholder="{{getPhoneNumber()}}" formControlName="phoneNumber"></p>
+          <p class="p4"><span>CAP:</span> <input type="text" id="zipCode" name="zipCode" required autocomplete="off" placeholder="{{getPostalCode()}}" formControlName="zipCode"></p>
+        </div>
+        <button class="save-changes-btn" (click)="saveChanges()">
+          <h4>SALVA MODIFICHE</h4>
+          <mat-icon>check</mat-icon>
+        </button>
+      </form>
+
+    </div>
+
+
+    <div class="card orders">
+      <h3>I miei ordini</h3>
+
+      <h4 *ngIf="ordini === 'Non sono ancora stati effettuati degli ordini'" style="font-weight: 400; margin-top: 35px;"> {{ ordini }} </h4>
+      <div class="orders-card">
+
+        <div class="single-product" routerLink="/order/{{ordini.id}}">
+          <img src="{{'https://api.kendydrink.com/product/' + ordini.id + '/img/' + '25'}}" alt="">
+          <div class="trackingCode"><h4>{{ordini.trackingCode}}</h4></div>
+          <div class="state"><h4>{{ordini.state}}</h4></div>
+          <div class="total"><h2>{{ordini.total | currency: 'EUR'}}</h2></div>
+          <button routerLink="/order/{{ordini.id}}">DETTAGLI</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card discount-codes" *ngIf="isInfluencer">
+      <h3>Codici sconto</h3>
+
+      <ul class="discount-codes-list">
+        <li>CODICE SCONTO: rkj34hkj54h32kj5</li>
+        <li>ORDINI EFFETTUATI: 43</li>
+        <li>GUADAGNO: {{ 99 | currency: 'EUR' }}</li>
+      </ul>
+
+    </div>
+
+    <button class="card delete-profile" (click)="displayPopup = true">
+      <mat-icon>add</mat-icon>
+      <h4>Elimina profilo</h4>
+    </button>
+
+
+
+  </div>
+
+
+
+  <div class="popup-conferma" *ngIf="displayPopup">
+    <div class="popup">
+      <h4>Sei sicuro di voler eliminare l'account?</h4>
+      <div class="btns">
+        <button (click)="displayPopup = false">ANNULLA</button>
+        <button (click)="deleteProfile()" class="btn2">CONFERMA</button>
+      </div>
+
+      <div class="confermaEliminazioneProfilo">
+        <h3> {{ responseDeletedUser }} </h3>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>

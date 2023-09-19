@@ -1,0 +1,49 @@
+<div class="wrapper">
+
+
+    <div class="title">DETTAGLI ORDINE</div>
+  
+  
+    <div class="all-info">
+
+
+        <div class="card trackingCode">
+            
+            <div class="single-product" style="display: flex; flex-direction: column; align-items: flex-start; margin: 5px 5px 15px 5px; padding: 15px;">
+                <h4>Codice di tracciamento: {{trackingCode}}</h4>
+                <a href="https://parcelsapp.com/it/tracking/{{trackingCode}}">CLICCA PER VEDERE LO STATO DELLA SPEDIZIONE</a>
+            </div>
+
+            <div class="single-product" style="display: flex; flex-direction: column; align-items: flex-start; margin: 15px 5px 5px 5px; padding: 15px;">
+                <h4>Codice sconto: <span style="font-weight: 500;">{{discountCode ? discountCode : 'Nessun codice sconto utilizzato'}}</span></h4>
+                <h4>Percentuale di sconto: <span style="font-weight: 500;">{{discountPercentage + '%' ? discountPercentage + '%' : 'Nessun codice sconto utilizzato'}}</span></h4>
+            </div>
+
+          </div>
+  
+
+        <div class="card orders">
+            <h3>Prodotti ordinati:</h3>
+    
+            <h4 *ngIf="productOrdered === 'Non sono ancora stati effettuati degli ordini'" style="font-weight: 400; margin-top: 35px;"> {{ productOrdered }} </h4>
+            <div class="orders-card">
+    
+                <div class="single-product" *ngFor="let p of productOrdered">
+        
+                    <img src="{{'https://api.kendydrink.com/product/' + p.id + '/img/' + '50'}}" alt="">
+                    <div class="title"><h3>{{p.name}}</h3></div>
+                    <div class="quantity"><h4>{{p.quantity}}</h4></div>
+                    <div class="price"><h3>{{p.quantity * p.price | currency: 'EUR'}}</h3></div>
+            
+                </div>
+    
+            </div>
+        </div>
+
+  
+    </div>
+  
+  
+  
+</div>
+  

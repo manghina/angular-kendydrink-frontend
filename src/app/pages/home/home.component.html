@@ -1,0 +1,84 @@
+
+
+<!-- <div class="carousel">
+
+
+  <c-carousel [interval]="0">
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let slide of slides">
+        <img
+          [src]="slide.src"
+          alt="{{slide.title}}"
+          class="d-block w-100"
+          loading="lazy"
+        />
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+  </c-carousel>
+
+
+</div>
+ -->
+
+
+
+<div class="carousel-container">
+  <carousel [slides]="slides"></carousel>
+</div>
+
+
+
+
+<div class="products">
+  <h2>I più venduti</h2>
+
+  <div class="products1" *ngIf="endCall">
+    <div class="product" *ngFor="let p of product.slice(0,6)">
+      <product [product]="p"></product>
+    </div>
+  </div>
+
+  <div class="mostra-catalogo">
+    <a routerLink="/catalog">Mostra tutto il catalogo</a>
+  </div>
+</div>
+
+
+
+<reviews></reviews>
+
+
+
+
+<div class="boxes">
+  <div class="box newsletter">
+    <h2>Iscriviti alla nostra newsletter!</h2>
+    <!-- <p>Iscriviti alla newsletter per ricevere uno sconto <br> del 5% sul tuo primo acquisto</p> -->
+
+    <div class="newsletter-field">
+      <img src="../../../assets/icons/mail-outline.svg" class="newsletter-mail-icon" alt="">
+      <form action="">
+        <input type="text" placeholder="Inserisci qui la tua email...">
+      </form>
+      <img src="../../../assets/icons/circle-alt.svg" class="newsletter-enter-icon" alt="">
+    </div>
+  </div>
+
+  <div class="box social">
+    <h2>Seguici sui social!</h2>
+    <p>Per conoscere in anteprima nuovi prodotti disponibili, offerte e promozioni, seguici su Facebook e Instagram</p>
+
+    <div class="icons">
+      <a href="https://www.instagram.com/kendydrink_italia/"><img src="../../../assets/icons/instagram-icon.svg" alt=""></a>
+      <a href="https://www.facebook.com/kendyItalia/"><img src="../../../assets/icons/facebook-icon.svg" alt=""></a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<footer></footer>

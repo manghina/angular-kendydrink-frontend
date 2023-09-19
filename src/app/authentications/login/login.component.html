@@ -1,0 +1,157 @@
+<div class="page-container">
+
+
+
+  <navbar></navbar>
+
+
+
+
+  <div class="contenitore">
+
+
+
+    <div class="testo">
+      <h1>CIAO!</h1>
+      <h2>Accedi ora all'area clienti!</h2>
+    </div>
+
+
+
+    <div class="login-container">
+
+      <div class="login">
+        <h3>ACCEDI</h3>
+
+        <!-- <div class="icons-otp">
+          <a class="google-icon" href="">
+            <img src="../../../assets/icons/google-grey-icon.svg" alt="">
+          </a>
+
+          <a class="facebook-icon" href="">
+            <img src="../../../assets/icons/facebook-grey-icon.svg" alt="">
+          </a>
+        </div> -->
+
+
+        <!-- <form class="form" [formGroup]="formemail" (ngSubmit)="continueBtn()" *ngIf="pageLoginWithOTP == false && pageLoginWithPsw == false">
+
+          <div class="email">
+              <div class="inputtt">
+                <img class="icon" src="../../../assets/icons/mail-grey.svg" alt="">
+                <div class="main-input">
+                  <input type="text" class="input" id="email" name="email" [value]="formemail.get('email')?.value" required autocomplete="off" placeholder="Email" formControlName="email">
+                  <button class="send-code"><p>INVIA CODICE</p></button>
+                </div>
+              </div>
+
+              <p class="form-error" *ngIf="!formemail.get('email')?.valid && formemail.get('email')?.touched">⚠️ Il campo non è valido</p>  <!-- ERROR -->
+          <!-- </div>
+
+          <div class="ccc"><input type="submit" class="submit-btn" value="CONTINUA" [disabled]="!formemail.valid"></div>
+
+
+          <div class="scritte-sotto">
+              <a routerLink="/register">Non sei ancora registrato? Registrati<br></a> -->
+              <!-- <a>Forgot your password?</a> -->
+          <!-- </div>
+
+        </form> -->
+
+
+
+
+
+        <form class="form" [formGroup]="formOTP" (ngSubmit)="submitLoginOTP()" *ngIf="pageLoginWithOTP == true">
+
+          <div class="email">
+              <div class="inputtt">
+                <img class="icon" src="../../../assets/icons/mail-grey.svg" alt="">
+                <div class="main-input">
+                  <input type="email" class="input" id="email" name="email" required autocomplete="off" placeholder="Email" formControlName="email">
+                  <button class="send-code" (click)="sendOTPCode()" [disabled]="buttonDisabled" [ngClass]="{'disabled-button': buttonDisabled}"><p>INVIA CODICE</p></button>
+                </div>
+              </div>
+
+              <!-- Errore campo vuoto o uscito -->
+              <p class="form-error" *ngIf="formOTP.get('email')?.touched && (formOTP.get('email')?.pristine || formOTP.get('email')?.value === '')">⚠️ Il campo è vuoto</p>
+          </div>
+
+
+          <div class="password otp">
+            <img class="icon" src="../../../assets/icons/lock.svg" alt="">
+              <input style="border-bottom: 3px solid var(--blu);" type="number" class="input" id="otp" name="otp" required autocomplete="off" placeholder="Codice di verifica" formControlName="otp">
+              <!-- Errore campo vuoto o uscito -->
+              <p class="form-error" *ngIf="formOTP.get('otp')?.touched && (formOTP.get('otp')?.pristine || formOTP.get('otp')?.value === '')">⚠️ Il campo è vuoto</p>
+              <!-- Errore cifre meno di 4 o più di 4 -->
+              <p class="form-error" *ngIf="formOTP.get('otp')?.touched && formOTP.get('otp')?.value && (formOTP.get('otp')?.value.length < 4 || formOTP.get('otp')?.value.length > 4)">⚠️ Il numero di cifre non è corretto</p>
+          </div>
+
+          <div (click)="passwordPage()" class="loginWithPsw"><p>Accedi con password</p> <img src="../../../assets/icons/arrow-down-grey.svg" alt=""></div>
+
+          <div class="ccc"><input type="submit" class="submit-btn" value="CONTINUA" [disabled]="!formOTP.valid"></div>
+
+
+          <div class="scritte-sotto">
+              <a routerLink="/register">Non sei ancora registrato? Registrati<br></a>
+              <!-- <a>Forgot your password?</a> -->
+          </div>
+
+        </form>
+
+
+
+
+        <form class="form" [formGroup]="formPsw" (ngSubmit)="submitLoginPsw()" *ngIf="pageLoginWithPsw == true">
+
+          <div class="email">
+              <div class="inputtt">
+                <img class="icon" src="../../../assets/icons/mail-grey.svg" alt="">
+                <input style="width: 290px; border-bottom: 3px solid var(--blu);" type="text" class="input" id="email" name="email" required autocomplete="off" placeholder="Email" formControlName="email">
+              </div>
+
+              <p class="form-error" *ngIf="!formPsw.get('email')?.valid && formPsw.get('email')?.touched">⚠️ Il campo non è valido</p>  <!-- ERROR -->
+          </div>
+
+
+          <div class="password otp">
+            <img class="icon" src="../../../assets/icons/lock.svg" alt="">
+            <input [type]="displayPsw ? 'text' : 'password'" style="border-bottom: 3px solid var(--blu);" class="input" id="password" name="password" required autocomplete="off" placeholder="Password" formControlName="password">
+              <img src="../../../assets/icons/eye-icon.svg" alt="" class="fas fa-eye" (click)="toggleDisplayPsw()" [style.display]="displayPsw ? 'none' : 'initial'">
+              <img src="../../../assets/icons/eye-slash.svg" alt="" class="fas fa-eye-slash" (click)="toggleDisplayPsw()" [style.display]="displayPsw ? 'initial' : 'none'">  
+              <!-- Errore campo vuoto o uscito -->
+              <p class="form-error" *ngIf="formPsw.get('password')?.touched && (formPsw.get('password')?.pristine || formPsw.get('password')?.value === '')">⚠️ Il campo è vuoto</p>
+              <p class="form-error" *ngIf="!formPsw.get('password')?.valid && formPsw.get('password')?.touched">⚠️ Inserisci almeno di 8 caratteri!</p>  <!-- ERROR -->
+          </div>
+
+          <div (click)="otpPage()" class="loginWithPsw"><p>Accedi con OTP <img src="../../../assets/icons/arrow-down-grey.svg" alt=""></p></div>
+
+          <div class="ccc"><input type="submit" class="submit-btn" value="CONTINUA" [disabled]="!formPsw.valid"></div>
+
+
+          <div class="scritte-sotto">
+              <a routerLink="/register">Non sei ancora registrato? Registrati<br></a>
+              <!-- <a>Forgot your password?</a> -->
+          </div>
+
+        </form>
+
+
+
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+</div>

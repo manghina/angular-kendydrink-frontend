@@ -1,0 +1,10 @@
+.box{
+  width: 100%;
+  height: 50px;
+  background: var(--blu);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box *{color: white; text-transform: uppercase; text-align: center;}

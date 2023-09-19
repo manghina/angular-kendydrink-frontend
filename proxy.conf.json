@@ -1,0 +1,7 @@
+{
+  "/api": {
+    "target": "https://api.kendydrink.it/user/new",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
