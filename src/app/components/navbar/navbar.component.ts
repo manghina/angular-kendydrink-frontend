@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/authentications/auth.service';
 import { Product } from 'src/app/models/products.model';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
 import { TokenService } from 'src/app/shared/token.service';
 
 
@@ -35,7 +36,7 @@ import { TokenService } from 'src/app/shared/token.service';
   ]
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  constructor(private authService: AuthService, private http: HttpClient, private token: TokenService, private router: Router, private cart: CartService) {
+  constructor(private authService: AuthService, private http: HttpClient, private token: TokenService, private router: Router, private cart: CartService, private checkoutS: CheckoutService) {
     const cartData = localStorage.getItem(this.cartKey);
     if (cartData) {
       this.product = JSON.parse(cartData);
@@ -65,6 +66,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   product = this.cart.items
   carrello = this.cart
+  billingInfo = this.checkoutS.billingInfo
 
   ngOnInit() {
     this.isHome = true;
@@ -187,33 +189,31 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.authService.LogOut();
   }
 
-  demo() {
-    this.http.post('https://api.kendydrink.com/login', { // login "guest" request (200)
-      "email": "mmonti@gmail.com",
-      "password": "monteLeone"
-    }).subscribe((response: any) => {
-
-      const token = response.data.token // token
-      const headers = { 'Authorization': 'Bearer ' + token, "Content-Type": "application/json", }
-      this.http.post('https://api.kendydrink.com/checkout', {}, { headers }).subscribe((response: any) => { // "auth" request (401)
-        console.log(response)
-      })
-    })
-  }
-
   checkout() {
-    this.http.post('https://api.kendydrink.com/login', {
-      "email": "mmonti@gmail.com",
-      "password": "monteLeone"
-    }).subscribe((response: any) => {
-      const token = response.data.token // token
-      const headers = { 'Authorization': 'Bearer ' + token, "Content-Type": "application/json", }
-      this.http.post('https://api.kendydrink.com/checkout', this.product, { headers }).subscribe((response: any) => { // "auth" request (401)
-        console.log(response)
+    // debugger
+    if (!this.isAtuthenticated()) {
+      this.http.post('https://api.kendydrink.com/login', {
+        "email": "mmonti@gmail.com",
+        "password": "monteLeone"
+      }).subscribe((response: any) => {
+        this.isAtuthenticated()
+        const token = response.data.token;
+        console.log(response.data.token);
+        this.token.handleData(token);
+        this.http.post('https://api.kendydrink.com/checkout', { cart: this.product }).subscribe((response: any) => {
+          localStorage.setItem("data", response)
+          console.log(response)
+          this.router.navigate(["/checkout/billing-details"]);
+        });
+      });
+    } else {
+      this.http.post('https://api.kendydrink.com/checkout', { cart: this.product, billing: this.billingInfo }).subscribe((response: any) => {
         localStorage.setItem("data", response)
+        console.log(response)
         this.router.navigate(["/checkout/billing-details"]);
       });
-    });
+    }
+
   }
 
 }

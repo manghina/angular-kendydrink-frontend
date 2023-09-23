@@ -15,5 +15,7 @@ export class CheckoutService {
   shippingAddress = ''
   zipCode = ''
 
+  billingInfo: any
+
 
 }

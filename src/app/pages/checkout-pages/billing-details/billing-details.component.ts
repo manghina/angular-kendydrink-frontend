@@ -19,8 +19,10 @@ export class BillingDetailsComponent {
   secondStep = false
   thirdStep = true
 
+  info: any
 
-  ngOnInit() {
+
+  ngOnInit(){
     this.homeform = new FormGroup({
       name: new FormControl(null, Validators.required),
       surname: new FormControl(null, Validators.required),
@@ -37,14 +39,18 @@ export class BillingDetailsComponent {
 
   onSubmit(){
 
-    this.checkoutService.name = this.homeform.value.name
+    /* this.checkoutService.name = this.homeform.value.name
     this.checkoutService.surname = this.homeform.value.surname
     this.checkoutService.email = this.homeform.value.email
     this.checkoutService.phoneNumber = this.homeform.value.phoneNumber
     this.checkoutService.city = this.homeform.value.city
     this.checkoutService.country = this.homeform.value.country
     this.checkoutService.shippingAddress = this.homeform.value.shippingAddress
-    this.checkoutService.zipCode = this.homeform.value.zipCode
+    this.checkoutService.zipCode = this.homeform.value.zipCode */
+
+    this.info = this.checkoutService.name + ', ' + this.checkoutService.surname + ', ' + this.checkoutService.email + ', ' + this.checkoutService.phoneNumber + ', ' + this.checkoutService.city + ', ' + this.checkoutService.country + ', ' + this.checkoutService.shippingAddress + ', ' + this.checkoutService.zipCode
+
+    this.checkoutService.billingInfo = this.info
 
   }
 

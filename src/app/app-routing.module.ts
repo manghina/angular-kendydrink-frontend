@@ -50,7 +50,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'catalog', component: CatalogComponent},
   {path: 'contacts', component: ContactsComponent},
-  {path: 'checkout', component: CheckoutComponent, children: [     // AGGIUNGERE canActivate: [AuthGuard]
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard], children: [     // AGGIUNGERE canActivate: [AuthGuard]
     {path: 'billing-details', component: BillingDetailsComponent},
     {path: 'shipping-info', component: ShippingInfoComponent, canActivate: [CheckoutGuard]}, /* DA IMPLEMENTARE IL GUARD */
     {path: 'payments', component: PaymentsComponent, canActivate: [CheckoutGuard]}, /* DA IMPLEMENTARE IL GUARD */

@@ -80,11 +80,12 @@
         </div>
 
         <!-- <p style="color: var(--default); display: flex; flex-direction: row; justify-content: space-around; margin-top: 30px;">Totale: <span style="color: var(--default);">{{carrello.totalCartQuantity() | currency: 'EUR'}}</span></p> -->
+
         <div class="procedi" style="margin-bottom: 0;">
           <a routerLink="/cart">VAI AL CARRELLO</a>
         </div>
 
-        <div class="procedi" (click)="checkout()">
+        <div class="procedi" (click)="checkout()" routerLink="/checkout/billing-info">
           <a style=" background-color: var(--blu);">PROCEDI {{carrello.totalCartPrice() | currency: 'EUR'}}</a>
         </div>
 
