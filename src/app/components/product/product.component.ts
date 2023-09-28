@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Product } from 'src/app/models/products.model';
+import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -8,16 +7,18 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent {
-  constructor(private cart: CartService){ }
+  constructor(private cart: CartService) {
+    this.URL_API = this.URL_API
+  }
   /* @Output() eventEmitter = new EventEmitter<any>(); */
-
+  URL_API = ''
   @Input() product!: any;
   isLoaded: boolean = false;
 
-  addToCart(): void{
+  addToCart(): void {
     this.cart.addToCart(this.product!);
-    setTimeout(()=>{
-      this.isLoaded = true;      
+    setTimeout(() => {
+      this.isLoaded = true;
     }, 500)
   }
 

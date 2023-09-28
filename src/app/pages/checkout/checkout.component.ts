@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { URL_API } from 'src/app/shared/constant';
 
 
 @Component({
@@ -32,10 +33,10 @@ export class CheckoutComponent {
   ]
   constructor(private http: HttpClient) {
     console.log("checkout")
-    this.sendCart()
+    // this.sendCart()
   }
   sendCart() {
-    this.http.post('https://api.kendydrink.com/checkout', { cart: this.product }).subscribe((response: any) => {
+    this.http.post(URL_API + 'checkout', { cart: this.product }).subscribe((response: any) => {
       console.log(response)
     });
   }

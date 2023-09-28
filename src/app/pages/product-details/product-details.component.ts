@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CartService } from '../../services/cart.service';
-import { Product } from '../../models/products.model';
-import { ProductsService } from 'src/app/services/products.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ProductsService } from 'src/app/services/products.service';
+import { URL_API } from 'src/app/shared/constant';
+import { Product } from '../../models/products.model';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,13 +13,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private productService: ProductsService, private cartService: CartService, private location: Location, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private productService: ProductsService, private cartService: CartService, private location: Location, private http: HttpClient) {
+    this.URL_API = URL_API
+  }
   prodottino!: Product;
   product = this.cartService.items;
   carrello = this.cartService;
   idProdotto: any
   prodotto: any
   isLoaded: boolean = false;
+  URL_API = ''
 
   goBack(): void {
     this.location.back();
@@ -35,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
 
-    this.http.get('https://api.kendydrink.com/product/' + this.idProdotto).subscribe((data: any) => {
+    this.http.get(URL_API + 'product/' + this.idProdotto).subscribe((data: any) => {
       this.prodotto = data;
       this.prodottino = this.prodotto[0];
       this.isLoaded = true;
@@ -48,30 +52,22 @@ export class ProductDetailsComponent implements OnInit {
 
   private getProductById(id: string): void {
     const products = this.productService.getProducts();
-    /* this.prodottino = products.find(p => p.id === id) || new Product(); */
   }
 
-  /* getSingleProduct() {
-    return this.http.get('https://api.kendydrink.com/product/' + this.idProdotto).subscribe((data: any) => {
-      console.log(data);
-      this.prodotto = data;
-      this.prodottino = this.prodotto[0];
-    });
-  } */
 
 
 
 
   slides = [
-    {img: "http://placehold.it/350x150/000000"},
-    {img: "http://placehold.it/350x150/111111"},
-    {img: "http://placehold.it/350x150/333333"},
-    {img: "http://placehold.it/350x150/666666"},
-    {img: "http://placehold.it/350x150/666666"},
-    {img: "http://placehold.it/350x150/666666"},
-    {img: "http://placehold.it/350x150/666666"},
-    {img: "http://placehold.it/350x150/666666"},
-    {img: "http://placehold.it/350x150/666666"}
+    { img: "http://placehold.it/350x150/000000" },
+    { img: "http://placehold.it/350x150/111111" },
+    { img: "http://placehold.it/350x150/333333" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/666666" },
+    { img: "http://placehold.it/350x150/666666" }
   ];
   /* slideConfig = {"slidesToShow": 4, "slidesToScroll": 4}; */
 

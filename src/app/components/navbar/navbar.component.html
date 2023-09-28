@@ -62,7 +62,7 @@
         <div class="single-product" *ngFor="let p of cartItems">
           <a>
             <div class="product-img" [routerLink]="['/product', p.id]"><img
-                src="{{'https://api.kendydrink.com/product/' + p.id + '/img/' + '15'}}" alt=""></div>
+                src="{{URL_API + 'product/' + p.id + '/img/' + '15'}}" alt=""></div>
             <div class="text">
               <h4 class="titolo" [routerLink]="['/product', p.id]">{{p.name}}</h4>
               <div class="product-info">
@@ -85,7 +85,7 @@
           <a routerLink="/cart">VAI AL CARRELLO</a>
         </div>
 
-        <div class="procedi" (click)="checkout()" routerLink="/checkout/billing-info">
+        <div class="procedi" (click)="checkout()" routerLink="/billing-details">
           <a style=" background-color: var(--blu);">PROCEDI {{carrello.totalCartPrice() | currency: 'EUR'}}</a>
         </div>
 

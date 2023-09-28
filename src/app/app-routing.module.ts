@@ -8,16 +8,14 @@ import { ProductDetailsComponent } from './pages/product-details/product-details
 import { ProfileComponent } from './pages/profile/profile.component';
 
 
-import { AuthGuard } from './authentications/auth.guard';
 import { LoginComponent } from './authentications/login/login.component';
+import { ProfileGuard } from './authentications/profile.guard';
 import { RegisterComponent } from './authentications/register/register.component';
 import { CartComponent } from './pages/cart/cart.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { BillingDetailsComponent } from './pages/checkout-pages/billing-details/billing-details.component';
-import { ShippingInfoComponent } from './pages/checkout-pages/shipping-info/shipping-info.component';
-import { CheckoutGuard } from './services/checkout.guard';
 import { PaymentsComponent } from './pages/checkout-pages/payments/payments.component';
-import { ProfileGuard } from './authentications/profile.guard';
+import { ShippingInfoComponent } from './pages/checkout-pages/shipping-info/shipping-info.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 
 
@@ -45,30 +43,27 @@ const routes: Routes = [
 
   /* {path: '', component: HomeComponent, canActivate: [AuthGuard]}, */
 
-  {path: '', redirectTo: 'shop', pathMatch: 'full'},
-  {path: 'shop', component: HomeComponent},
-  {path: 'cart', component: CartComponent},
-  {path: 'catalog', component: CatalogComponent},
-  {path: 'contacts', component: ContactsComponent},
-  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard], children: [     // AGGIUNGERE canActivate: [AuthGuard]
-    {path: 'billing-details', component: BillingDetailsComponent},
-    {path: 'shipping-info', component: ShippingInfoComponent, canActivate: [CheckoutGuard]}, /* DA IMPLEMENTARE IL GUARD */
-    {path: 'payments', component: PaymentsComponent, canActivate: [CheckoutGuard]}, /* DA IMPLEMENTARE IL GUARD */
-  ]},
-  {path: 'product', component: ProductDetailsComponent},
-  {path: 'product/:id', component: ProductDetailsComponent},
+  { path: '', redirectTo: 'shop', pathMatch: 'full' },
+  { path: 'shop', component: HomeComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'catalog', component: CatalogComponent },
+  { path: 'contacts', component: ContactsComponent },
 
-  {path: 'order', component: OrderDetailsComponent, canActivate: [ProfileGuard]},
-  {path: 'order/:id', component: OrderDetailsComponent, canActivate: [ProfileGuard]},
+  { path: 'billing-details', component: BillingDetailsComponent },
+  { path: 'shipping-info', component: ShippingInfoComponent },
+  { path: 'payments', component: PaymentsComponent },
+  { path: 'checkout', component: CheckoutComponent },
 
-
-  {path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard]},
-
+  { path: 'product', component: ProductDetailsComponent },
+  { path: 'product/:id', component: ProductDetailsComponent },
+  { path: 'order', component: OrderDetailsComponent, canActivate: [ProfileGuard] },
+  { path: 'order/:id', component: OrderDetailsComponent, canActivate: [ProfileGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [ProfileGuard] },
   /* LOGIN AND REGISTER */
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: '404', component: NotfoundComponent},
-  {path: '**', redirectTo: '/404'}
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: '404', component: NotfoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

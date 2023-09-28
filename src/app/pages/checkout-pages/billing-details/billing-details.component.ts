@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/models/products.model';
-import { Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CheckoutService } from 'src/app/services/checkout.service';
 
 @Component({
@@ -12,45 +11,38 @@ import { CheckoutService } from 'src/app/services/checkout.service';
 })
 export class BillingDetailsComponent {
 
-  constructor(private cart: CartService, private checkoutService: CheckoutService){ }
+  constructor(private cart: CartService, private checkoutService: CheckoutService, private router: Router) {
+    this.URL_API = this.URL_API
+  }
   homeform!: FormGroup;
   product = this.cart.items
-  
+  URL_API = ''
   secondStep = false
   thirdStep = true
 
   info: any
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.homeform = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      surname: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('[- +()0-9]+')]),
-      city: new FormControl(''),
-      country: new FormControl(''),
-      shippingAddress: new FormControl(null, Validators.required),
-      zipCode: new FormControl(null, Validators.required),
+      name: new FormControl(1, Validators.required),
+      surname: new FormControl(1, Validators.required),
+      email: new FormControl('e@e.it', [Validators.required, Validators.email]),
+      phoneNumber: new FormControl(1, [Validators.required, Validators.pattern('[- +()0-9]+')]),
+      city: new FormControl('1'),
+      country: new FormControl('1'),
+      shippingAddress: new FormControl(1, Validators.required),
+      zipCode: new FormControl(1, Validators.required),
     })
   }
 
 
 
-  onSubmit(){
-
-    /* this.checkoutService.name = this.homeform.value.name
-    this.checkoutService.surname = this.homeform.value.surname
-    this.checkoutService.email = this.homeform.value.email
-    this.checkoutService.phoneNumber = this.homeform.value.phoneNumber
-    this.checkoutService.city = this.homeform.value.city
-    this.checkoutService.country = this.homeform.value.country
-    this.checkoutService.shippingAddress = this.homeform.value.shippingAddress
-    this.checkoutService.zipCode = this.homeform.value.zipCode */
-
+  onSubmit() {
     this.info = this.checkoutService.name + ', ' + this.checkoutService.surname + ', ' + this.checkoutService.email + ', ' + this.checkoutService.phoneNumber + ', ' + this.checkoutService.city + ', ' + this.checkoutService.country + ', ' + this.checkoutService.shippingAddress + ', ' + this.checkoutService.zipCode
-
-    this.checkoutService.billingInfo = this.info
+    this.checkoutService.billingInfo = this.homeform.value
+    localStorage.setItem('billingInfo', JSON.stringify(this.homeform.value))
+    this.router.navigate(['/shipping-info'])
 
   }
 

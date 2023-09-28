@@ -1,12 +1,12 @@
-import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { Slide } from "../../components/carousel/carousel.interface";
-import { AnimationType } from "../../components/carousel/carousel.animations";
-import { CarouselComponent } from "../../components/carousel/carousel.component";
-import { ProductsService } from "src/app/services/products.service";
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Product } from "src/app/models/products.model";
 import { CartService } from "src/app/services/cart.service";
-import { Subscription } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { ProductsService } from "src/app/services/products.service";
+import { URL_API } from "src/app/shared/constant";
+import { AnimationType } from "../../components/carousel/carousel.animations";
+import { CarouselComponent } from "../../components/carousel/carousel.component";
+import { Slide } from "../../components/carousel/carousel.interface";
 
 
 @Component({
@@ -14,7 +14,7 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss', './responsive.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   @ViewChild(CarouselComponent) carousel!: CarouselComponent;
 
   animationType = AnimationType.Scale;
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit{
     } */
   ];
 
-  constructor(private _productsService: ProductsService, private cart: CartService, private http: HttpClient){ }
+  constructor(private _productsService: ProductsService, private cart: CartService, private http: HttpClient) { }
 
   setAnimationType(type: { value: AnimationType; }) {
     this.animationType = type.value;
@@ -73,12 +73,12 @@ export class HomeComponent implements OnInit{
   //products = this.carrellino.cartProducts
   product: any = [];
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('ngOnInit Home Component')
     /* this.product = this._productsService.getProducts() */ /* PRIMA, CON I MIEI PRODOTTI LOCALI */
-    
+
     this.product = this.getBestProducts()
-    
+
 
     /* this._productsService.getAllProducts()
     this._productsService.AllProducts
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit{
 
     console.log('LISTA TUTTI I PRODOTTI');
     console.log(this.product); */
-    
+
 
     /* this.product = this._productsService.getAllProducts() */
     /* this._productsService.getAllProducts().subscribe((data: Product[]) => {
@@ -94,8 +94,8 @@ export class HomeComponent implements OnInit{
     }); */
   }
 
-  getBestProducts(){
-    this.http.get('https://api.kendydrink.com/' + 'product/best').subscribe(data => {
+  getBestProducts() {
+    this.http.get(URL_API + 'product/best').subscribe(data => {
       this.product = data;
       this.endCall = true;
       console.log(data)

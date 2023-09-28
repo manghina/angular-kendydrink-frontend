@@ -3,15 +3,17 @@ import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { User } from '../models/user.model';
+import { URL_API } from '../shared/constant';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements OnInit {
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
 
-  private apiUrl = 'https://api.kendydrink.com/';
+  }
+
   isLoggedIn = false
   isAdmin = false
   isInfluencer = false
@@ -27,28 +29,23 @@ export class AuthService implements OnInit {
   // Questo metodo setta il valore della variabile, in base a cosa ci si passa nella firma (true o false)
   setIsLogged(value: boolean) {
     const todayDate = new Date();
-    console.log("------------------------------");
-    console.log("Data di oggi: ");
-    console.log(todayDate);
-    console.log("Data scadenza del token: ");
-    console.log(this.expirationTokenDate);
     this.isLogged.next(value);
+    localStorage.setItem('isLogged', 'true')
     if (this.expirationTokenDate != undefined) {
       this.isExpired = todayDate.getTime() > this.expirationTokenDate!.getTime();
-      console.log("Is Token Expired? ");
-      console.log(this.isExpired);
-      console.log("------------------------------");
       if (this.isExpired) {
         this.isLogged.next(false);
       } else this.isLogged.next(value);
-    } else console.log("------------------------------");
+    }
   }
 
   ngOnInit(): void {
 
   }
 
-  isAuthenticated() { return this.isLoggedIn }
+  isAuthenticated() {
+    return !!localStorage.getItem('isLogged')
+  }
 
   isRoleAdmin() { return this.isAdmin }
 
@@ -57,19 +54,21 @@ export class AuthService implements OnInit {
     this.isLoggedIn = true
   }
 
-  apiLogInEmail = `${this.apiUrl}user/login/email`
-  apiLogInGoogle = `${this.apiUrl}user/login/google`
+  apiLogInEmail = `${URL_API}user/login/email`
+  apiLogInGoogle = `${URL_API}user/login/google`
 
   LogInEmail(body: {}) {
+    this.setIsLogged(true);
     return this.http.post(this.apiLogInEmail, {})
   }
 
   LogInGoogle(body: {}) { /* CREDO SIA DA MODIFICARE IN BASE ALLE API DI GOOGLE */
+    this.setIsLogged(true);
     return this.http.post(this.apiLogInGoogle, {})
   }
 
   Register(email: string, password: string) {
-    return this.http.post(this.apiUrl + 'user', {})
+    return this.http.post(URL_API + 'register', {})
   }
 
   LogOut() {
@@ -87,7 +86,7 @@ export class AuthService implements OnInit {
   GetToken() {
     // Se trova il token nel local o nel session storage, significa che l'utente è ancora loggato, quindi setta la variabile
     // isLogged a true 
-    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+    if (localStorage.getItem("auth_token") || sessionStorage.getItem("auth_token")) {
       this.setIsLogged(true);
       if (!localStorage.getItem("expiration")) {
         const expirationDate = new Date();
@@ -95,7 +94,7 @@ export class AuthService implements OnInit {
         this.expirationTokenDate = expirationDate;
         localStorage.setItem("expiration", expirationDate.toString());
       }
-      return localStorage.getItem("token") || sessionStorage.getItem("token")
+      return localStorage.getItem("auth_token") || sessionStorage.getItem("auth_token")
     } else { // se non trova il token, setta la variabile a false, perchè se il token non c'è significa che non è loggato
       this.setIsLogged(false);
       return '';

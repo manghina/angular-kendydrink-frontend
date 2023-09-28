@@ -1,0 +1,1 @@
+{"ast":null,"code":"//export const URL_API = 'https://api.kendydrink.com/'\nexport const URL_API = 'http://localhost:8000/';","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

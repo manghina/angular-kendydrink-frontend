@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProductComponent } from 'src/app/components/product/product.component';
 import { ProductsService } from 'src/app/services/products.service';
+import { URL_API } from 'src/app/shared/constant';
 
 @Component({
   selector: 'app-orders-details',
@@ -10,7 +10,9 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./order-details.component.scss']
 })
 export class OrderDetailsComponent implements OnInit {
-  constructor(private products: ProductsService, private route: ActivatedRoute, private location: Location) {}
+  constructor(private products: ProductsService, private route: ActivatedRoute, private location: Location) {
+    this.URL_API = URL_API
+  }
 
   order: any;
   orderId!: any;
@@ -23,8 +25,9 @@ export class OrderDetailsComponent implements OnInit {
   trackingCode!: string
   discountCode!: string
   discountPercentage!: number
+  URL_API = ''
 
-  goBack(){ this.location.back() }
+  goBack() { this.location.back() }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -57,7 +60,7 @@ export class OrderDetailsComponent implements OnInit {
     return orderedProductItem ? orderedProductItem.product : 'Prodotti non disponibili';
   }
 
-  edit(){ this.onEdit = true }
-  saveChanges(){ this.onEdit = false } // FARE ANCHE RICHIESTA PATCH
-  
+  edit() { this.onEdit = true }
+  saveChanges() { this.onEdit = false } // FARE ANCHE RICHIESTA PATCH
+
 }

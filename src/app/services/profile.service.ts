@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { AuthService } from '../authentications/auth.service';
 import { User } from '../models/user.model';
+import { URL_API } from '../shared/constant';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-  constructor(private http: HttpClient, private authService: AuthService, /* private authInterceptor: AuthInterceptor */){ }
+  constructor(private http: HttpClient, private authService: AuthService, /* private authInterceptor: AuthInterceptor */) { }
 
-  urlChangeInfo = 'https://api.kendydrink.com/user/';
+  urlChangeInfo = URL_API + 'user/';
 
   UserInfo!: User
   orders = []
@@ -27,7 +28,7 @@ export class ProfileService {
     return this.http.get(this.urlChangeInfo + this.authService.GetId());
   }
 
-  deleteUser(){
+  deleteUser() {
     this.http.delete('https://jsonplaceholder.typicode.com/posts/1').subscribe(() =>
       this.responseDeletedUser = 'Eliminazione avvenuta con successo!'
       // aggiungere display Popup Conferma cancellazione profilo

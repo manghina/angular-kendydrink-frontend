@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/authentications/auth.service';
 import { Product } from 'src/app/models/products.model';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { URL_API } from 'src/app/shared/constant';
 import { TokenService } from 'src/app/shared/token.service';
 
 
@@ -37,6 +38,7 @@ import { TokenService } from 'src/app/shared/token.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private http: HttpClient, private token: TokenService, private router: Router, private cart: CartService, private checkoutS: CheckoutService) {
+    this.URL_API = this.URL_API
     const cartData = localStorage.getItem(this.cartKey);
     if (cartData) {
       this.product = JSON.parse(cartData);
@@ -48,7 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   cartItemsSubscription!: Subscription;
 
   scrolled = false;
-
+  URL_API = ''
   cartVisible = false;
   profileMenuVisible = false;
   menuHovered = false;
@@ -190,9 +192,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   checkout() {
-    // debugger
     if (!this.isAtuthenticated()) {
-      this.http.post('https://api.kendydrink.com/login', {
+      this.http.post(URL_API + 'login', {
         "email": "mmonti@gmail.com",
         "password": "monteLeone"
       }).subscribe((response: any) => {
@@ -200,14 +201,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
         const token = response.data.token;
         console.log(response.data.token);
         this.token.handleData(token);
-        this.http.post('https://api.kendydrink.com/checkout', { cart: this.product }).subscribe((response: any) => {
+        this.http.post(URL_API + 'checkout', { cart: this.product }).subscribe((response: any) => {
           localStorage.setItem("data", response)
           console.log(response)
           this.router.navigate(["/checkout/billing-details"]);
         });
       });
     } else {
-      this.http.post('https://api.kendydrink.com/checkout', { cart: this.product, billing: this.billingInfo }).subscribe((response: any) => {
+      this.http.post(URL_API + 'checkout', { cart: this.product, billing: this.billingInfo }).subscribe((response: any) => {
         localStorage.setItem("data", response)
         console.log(response)
         this.router.navigate(["/checkout/billing-details"]);

@@ -1,11 +1,11 @@
-
 <div class="product">
 
 
 
   <div class="prodotto">
 
-    <img [routerLink]="['/product', product.id]" src="{{ 'https://api.kendydrink.com/product/' + product.id + '/img/' + '25' }}" alt="" class="img">
+    <img [routerLink]="['/product', product.id]" src="{{ URL_API +'product/' + product.id + '/img/' + '25' }}" alt=""
+      class="img">
     <div class="text" [routerLink]="['/product', product.id]">
       <h5>{{ product.name }}</h5>
       <h3>{{ product.price }} €</h3>
@@ -18,7 +18,9 @@
   <div class="prodotto-acquista">
 
     <div class="continua-lo-shopping">
-      <button routerLink="/catalog"><h2>Continua lo shopping</h2></button>
+      <button routerLink="/catalog">
+        <h2>Continua lo shopping</h2>
+      </button>
     </div>
     <div class="add-to-cart">
       <button (click)="addToCart()"><img src="../../../assets/icons/cart-shopping-icon.svg" alt=""></button>
